@@ -3711,6 +3711,13 @@ num_list[0] = 666
    > data = v11[2:] + v21[2:]
    > result = int(data, base=2)
    > print(result)
+   > 
+   > 
+   > v1 = 123
+   > v2 = 456
+   > data = bin(v1)[2:] + bin(v2)[2:]
+   > result = int(data, base=2)
+   > print(result)
    > ```
    >
    > 
@@ -3726,8 +3733,22 @@ num_list[0] = 666
    > ​		456  对应二进制为  "0b111001000" ，去除前缀0b之后的二进制为 "111001000"，，补足16位为  "00000001 11001000"
    >
    > ​		将两个二进制拼接起来的值为："00000000 0111101100000001 11001000"，再将此值转换为整型为：8061384
+   >
+   > ```python
+   > v1 = 123
+   > v2 = 456
+   > data = bin(v1)[2:].zfill(16) + bin(v2)[2:].zfill(16)
+   > result = int(data,base=2)
+   > print(result)
+   > ```
+   >
+   > 
 
 4. 列举你了解的那些数据类型的值转换为布尔值为False。
+
+   ```markdown
+   空、0转换布尔值都是False
+   ```
 
 5. 看代码写结果：
 
@@ -3752,7 +3773,24 @@ num_list[0] = 666
        print(110)
    ```
 
+   ```markdown
+   456
+   666
+   345
+   ```
+
+   
+
 6. 让用户输入一段文本，请实现将文本中的敏感词 `苍老师`、`波波老师`替换为 `***`，最后并输入替换后的文本。
+
+   ```python
+   text = input("请输入内容：")
+   text = text.replace("苍老师", "***")
+   text = text.replace("波波老师", "***")
+   print(text)
+   ```
+
+   
 
 7. 有变量name = "aleX leNb " 完成如下操作： 
 
@@ -3764,8 +3802,40 @@ num_list[0] = 666
    - 将name变量对应的值根据第一个"l"分割,并输出结果
    - 将 name 变量对应的值变大写,并输出结果
    - 将 name 变量对应的值变小写,并输出结果
+   - ```python
+     name = "aleX leNb "
+     print(name.strip())
+     
+     print(name.startswith("al"))
+     print(name[0:2] == "al")
+     
+     print(name.endswith("Nb"))
+     print(name[-2:] == "Nb")
+     
+     v1 = name.replace("l", "p")
+     print(v1)
+     
+     v2 = name.split("l")
+     print(v2)  # ['a', 'eX ', 'eNb ']
+     
+     v3 = name.split("l", 1)
+     print(v3)  # ['a', 'eX leNb ']
+     
+     print(name.upper())
+     print(name.lower())
+     ```
 
-8. 如何实现字符串的翻转？
+     
+
+8. 如何实现字符串的翻转？                                                                                                                                                              
+
+   ```python
+   name = "武沛齐"
+   data = name[::-1]
+   print(data)
+   ```
+
+   
 
 9. 有字符串s = "123a4b5c"
 
@@ -3773,16 +3843,62 @@ num_list[0] = 666
    - 通过对s切片形成新的字符串 "a4b"
    - 通过对s切片形成字符串 "c"
    - 通过对s切片形成字符串 "ba2"
+   - ```python
+     s = "123a4b5c"
+     
+     print(s[0:3])
+     print(s[3:6])
+     
+     print(s[-1])
+     print(s[len(s) - 1])
+     
+     print(s[-3:0:-2])
+     ```
 
 10. 使用while循环实现对字符串 message = "伤情最是晚凉天，憔悴厮人不堪言" 中每个字符进行输出。
 
+    ```python
+    message = "伤情最是晚凉天，憔悴厮人不堪言"
+    index = 0
+    while index < len(message):
+        print(message[index])
+        index += 1
+    ```
+
 11. 使用for循环实现对字符串 message = "伤情最是晚凉天，憔悴厮人不堪言" 中每个字符进行输出。
+
+    ```python
+    message = "伤情最是晚凉天，憔悴厮人不堪言"
+    for item in message:
+        print(item)
+    ```
 
 12. 使用for循环和range实现对字符串 message = "伤情最是晚凉天，憔悴厮人不堪言" 中每个字符进行倒叙输出。
 
+    ```python
+    message = "伤情最是晚凉天，憔悴厮人不堪言"
+    for index in range(len(message)):
+        print(message[len(message)-index-1])
+    ```
+
 13. 使用for循环实现输出倒计时效果，例如：输出内容依次是："倒计时3秒"，"倒计时2秒"，"倒计时1秒"。
 
+    ```python
+    for num in range(3, 0, -1):  # [3,2,1]
+        text = "倒计时{}秒".format(num)
+        print(text)
+    ```
+
 14. 让用户输入一段文本，请计算文本中 "浪" 出现的次数，并输入结果。
+
+    ```python
+    text = input("请输入一段文本：") # 阿士大夫埃里克森打发斯蒂芬
+    count = 0
+    for item in text:
+        if item == "浪":
+            count += 1
+    print(count)
+    ```
 
 15. 获取用户两次输入的内容，并提取其中的数字，然后实现数字的相加（转换为整型再相加）：
 
@@ -3790,12 +3906,29 @@ num_list[0] = 666
     """
     要求：
     	将num1中的的所有数字找到并拼接起来：1232312
-    	将num1中的的所有数字找到并拼接起来：1218323
+    	将num2中的的所有数字找到并拼接起来：1218323
     	然后将两个数字进行相加。
     """
     num1 = input("请输入：") # asdfd123sf2312
     num2 = input("请输入：") # a12dfd183sf23
     # 请补充代码
+    
+    num1 = input("请输入：")  # "asdfd123sf2312"
+    num1_list = []
+    for item in num1:
+        if item.isdecimal():
+            num1_list.append(item)
+    data1 = "".join(num1_list)  # "1232312"
+    
+    num2 = input("请输入：")  # a12dfd183sf23
+    num2_list = []
+    for item in num2:
+        if item.isdecimal():
+            num2_list.append(item)
+    data2 = "".join(num2_list)
+    
+    result = int(data1) + int(data2)
+    print(result)
     ```
 
     
