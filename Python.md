@@ -4901,14 +4901,14 @@ v1 = (11,22,33)
 v2 = ("李杰","Alex")
 v3 = (True,123,"Alex",[11,22,33,44])
 
-# 建议：议在元组的最后多加一个逗v3 = ("李杰","Alex",)
+# 建议：议在元组的最后多加一个逗v3 = ("李杰","Alex")
 ```
 
 ```python
 d1 = (1)  # 1
 d2 = (1,) # (1,)
 
-d3 = (1,2)
+d3 = (1,2) 
 d4 = (1,2)
 ```
 
@@ -4917,15 +4917,17 @@ d4 = (1,2)
 ```python
 # 面试题
 1. 比较值 v1 = (1) 和 v2 = 1 和 v3 = (1,) 有什么区别？
+# v1和v2是整形，v3是元组
 2. 比较值 v1 = ( (1),(2),(3) ) 和 v2 = ( (1,) , (2,) , (3,),) 有什么区别？
               (1,2,3)
+# v1内的元素为整形，v2内的元素为元组
 ```
 
 ### 2.2 独有功能
 
 无
 
-### 2.3 公共功能
+### 2.3 **公共**功能
 
 1. 相加，两个列表相加获取生成一个新的列表。
 
@@ -4955,35 +4957,35 @@ d4 = (1,2)
 
    ```python
    user_list = ("范德彪","刘华强",'尼古拉斯赵四',)
-   print( len(user_list) )
+   print( len(user_list) ) # 3
    ```
 
 4. 索引
 
    ```python
    user_list = ("范德彪","刘华强",'尼古拉斯赵四',)
-   print( user_list[0] )
-   print( user_list[2] )
-   print( user_list[3] )
+   print( user_list[0] ) # 范德彪
+   print( user_list[1] ) # 刘华强
+   print( user_list[2] ) # 尼古拉斯赵四
    ```
 
 5. 切片
 
    ```python
    user_list = ("范德彪","刘华强",'尼古拉斯赵四',)
-   print( user_list[0:2] )
-   print( user_list[1:] )
-   print( user_list[:-1] )
+   print( user_list[0:2] ) # ('范德彪', '刘华强')
+   print( user_list[1:] ) # ('刘华强', '尼古拉斯赵四')
+   print( user_list[:-1] ) # ('范德彪', '刘华强')
    ```
 
 6. 步长
 
    ```python
    user_list = ("范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能")
-   print( user_list[1:4:2] )
-   print( user_list[0::2] )
-   print( user_list[1::2] )
-   print( user_list[4:1:-1] )
+   print( user_list[1:4:2] ) # ('刘华强', '宋小宝')
+   print( user_list[0::2] ) # ('范德彪', '尼古拉斯赵四', '刘能')
+   print( user_list[1::2] ) # ('刘华强', '宋小宝')
+   print( user_list[4:1:-1] ) # ('刘能', '宋小宝', '尼古拉斯赵四')
    ```
 
    ```python
@@ -4991,7 +4993,7 @@ d4 = (1,2)
    user_list = ("范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能")
    data = user_list[::-1]
    
-   # 列表
+   # 列表的
    user_list = ["范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能"]
    data = user_list[::-1]
    
