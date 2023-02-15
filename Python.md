@@ -5352,7 +5352,7 @@ v44 = dict()
    data = set()
    data.add("周杰伦")
    data.add("林俊杰")
-   print(data)
+   print(data) # {'周杰伦', '林俊杰'}
    ```
 
 2. 删除元素
@@ -5501,7 +5501,7 @@ v2 = tuple(data) # (11,22,33,3,99)
 
 目前可哈希的数据类型：int、bool、str、tuple，而list、set是不可哈希的。
 
-总结：集合的元素只能是 int、bool、str、tuple 。
+**总结：集合的元素只能是 int、bool、str、tuple 。**
 
 - 转换成功
 
@@ -5603,7 +5603,7 @@ print(v4)  # {False}
        name = input("请输入姓名(N/n退出)：")
        if name.upper() == "Q":
            break
-       if name in v1:
+       if name in v1: 
            v2.append(name)
    	else:
            v1.add(name)
@@ -5708,7 +5708,7 @@ data = { "k1":1,  "k2":2 }
   print(data) # {"k1":2}
   ```
 
-- 无序（在Python3.6+字典就是有序了，之前的字典都是无序。）
+- **无序（在Python3.6+字典就是有序了，之前的字典都是无序。）**
 
   ```python
   data = { "k1":1,  "k2":2 }
@@ -5776,14 +5776,14 @@ data_dict = {
     1: 29,
     True: 5
 }
-print(data_dict) # {1: 5}
+print(data_dict) # {1: 5}  True、Fasle分别为1、0，无法共存。
 ```
 
 
 
 一般在什么情况下会用到字典呢？
 
-当我们想要表示一组固定信息时，用字典可以更加的直观，例如：
+当我们想要**表示一组固定信息时**，用字典可以更加的直观，例如：
 
 ```python
 # 用户列表
@@ -6035,10 +6035,10 @@ user_list = [ {"name":"alex","pwd":"123"}, {"name":"eric","pwd":"123"} ]
 
    ```python
    info = {"age":12, "status":True,"name":"武沛齐"}
-   data = info.popitem() # ("name","武沛齐" )
+   data = info.popitem() # ("name","武沛齐" )， 指的是删除的那一个元素
    
    print(info) # {"age":12, "status":True}
-   print(data) # ("name","武沛齐")
+   print(data) # ("name","武沛齐")  
    ```
 
    - py3.6后，popitem移除最后的值。
@@ -6173,24 +6173,40 @@ stock_dict = {
    info = {"age":12, "status":True,"name":"武沛齐"}
    for item in info:
    	print(item)  # 所有键
+       
+   # age
+   # status
+   # name
    ```
 
    ```python
    info = {"age":12, "status":True,"name":"武沛齐"}
-   for item in info.key():
-   	print(item)
+   for item in info.keys():
+   	print(item) # 所有键
+       
+   # age
+   # status
+   # name
    ```
 
    ```python
    info = {"age":12, "status":True,"name":"武沛齐"}
    for item in info.values():
-   	print(item)
+   	print(item)  # 所有值
+       
+   # 12
+   # True
+   # 武沛齐
    ```
 
    ```python
    info = {"age":12, "status":True,"name":"武沛齐"}
    for key,value in info.items():
    	print(key,value)
+       
+   # age 12
+   # status True
+   # name 武沛齐
    ```
 
 
@@ -6253,7 +6269,7 @@ v2 = info.get("alex")
 
 我们已学了很多数据类型，在涉及多种数据类型之间的嵌套时，需注意一下几点：
 
-- 字典的键必须可哈希（list/set/dict不可哈希）。
+- 字典的**键**必须可哈希（list/set/dict不可哈希）。
 
   ```python
   info = {
@@ -6322,7 +6338,7 @@ dic = {
 
 ```python
 v1 = 3.14
-v2 = 9.89
+v2 = 9.89 
 ```
 
 关于浮点型的其他知识点如下：
@@ -6407,6 +6423,23 @@ print(v3) # 0.3
    # 请在修改字典中 "k1" 对应的值为 "alex"，输出修改后的字典
    # 请在k3对应的值中追加一个元素 44，输出修改后的字典
    # 请在k3对应的值的第 1 个位置插入个元素 18，输出修改后的字典
+   
+   
+   dic = {'k1': "v1", "k2": "v2", "k3": [11, 22, 33]}
+   
+   dic['k4'] = "v4"
+   print(dic)
+   
+   dic['k1'] = "alex"
+   print(dic)
+   
+   dic['k3'].append(44)
+   print(dic)
+   
+   dic['k3'].insert(1,18)
+   print(dic)
+   
+   # 注意：int/float/bool/str/list/tuple/set/dict
    ```
 
 2. 根据需求写代码
@@ -6422,12 +6455,48 @@ print(v3) # 0.3
    # 2，将name对应的列表中的alex全变成大写。
    # 3，oldboy对应的字典加⼀个键值对’⽼男孩’:’linux’。
    # 4，将oldboy对应的字典中的alex对应的列表中的python2删除
+   
+   
+   dic1 = {
+       'name': ['alex', 2, 3, 5],
+       'job': 'teacher',
+       'oldboy': {'alex': ['python1', 'python2', 100] }
+   }
+   
+   
+   dic1['name'].append("wusir")
+   
+   new_name = dic1['name'][0].upper()
+   dic1['name'][0] = new_name
+   
+   new_name = dic1['name'][0].capitalize()
+   dic1['name'][0] = new_name
+   
+   dic1['oldboy']['老男孩'] = "linux"
+   
+   dic1['oldboy']['alex'].remove("python2")
+   
+   del dic1['oldboy']['alex'][1]
    ```
 
 3. 循环提示用户输入，并将输入内容添加到字典中（如果输入N或n则停止循环）
 
    ```python
    例如：用户输入 x1|wupeiqi ,则需要再字典中添加键值对 {'x1':"wupeiqi"}
+   
+   info = {}
+   
+   while True:
+       text = input("请输入内容（n/N退出)：")  # x1|wupeiqi
+       if text.upper() == "N":
+           break
+       data_list = text.split("|")  # ["x1","wupeiqi"]
+       info[data_list[0]] = data_list[1]
+   
+   print(info) 
+   
+   
+   # 
    ```
 
 4. 判断以下值那个能做字典的key ？那个能做集合的元素？
@@ -6441,20 +6510,58 @@ print(v3) # 0.3
    - {11,22,33,4}
    - {'name':'wupeiq','age':18}
 
+   ```python
+   [1,2]
+   {11,22,33,4}
+   {'name':'wupeiq','age':18}
+   ```
+
 5. 将字典的键和值分别追加到 key_list 和 value_list 两个列表中，如：
 
    ```python
    key_list = []
    value_list = []
    info = {'k1':'v1','k2':'v2','k3':'v3'}
+   
+   # 1
+   key_list = []
+   value_list = []
+   info = {'k1': 'v1', 'k2': 'v2', 'k3': 'v3'}
+   for key, value in info.items():
+       key_list.append(key)
+       value_list.append(value)
+   print(key_list)
+   print(value_list)
+   
+   # 2
+   key_list = []
+   value_list = []
+   info = {'k1': 'v1', 'k2': 'v2', 'k3': 'v3'}
+   key_list = list(info.keys())
+   value_list = list(info.values())
+   print(key_list)
+   print(value_list)
    ```
 
 6. 字典dic = {'k1': "v1", "k2": "v2", "k3": [11,22,33]}
 
    ```python
-   a. 请循环输出所有的key
-   b. 请循环输出所有的value
-   c. 请循环输出所有的key和value
+   # a. 请循环输出所有的key
+   # b. 请循环输出所有的value
+   # c. 请循环输出所有的key和value
+   
+   dic = {'k1': "v1", "k2": "v2", "k3": [11, 22, 33]}
+   for key in dic.keys():
+       print(key)
+   
+   dic = {'k1': "v1", "k2": "v2", "k3": [11, 22, 33]}
+   for v in dic.values():
+       print(v)
+   
+   dic = {'k1': "v1", "k2": "v2", "k3": [11, 22, 33]}
+   for k, v in dic.items():
+       print(k, v)
+   
    ```
 
 7. 请循环打印k2对应的值中的每个元素。
@@ -6464,9 +6571,25 @@ print(v3) # 0.3
        'k1':'v1',
        'k2':[('alex'),('wupeiqi'),('oldboy')],
    }
+   
+   for item in info['k2']:
+       print(item)
    ```
 
 8. 有字符串"k: 1|k1:2|k2:3  |k3 :4" 处理成字典 {'k':1,'k1':2....} 
+
+   ```python
+   result = {}
+   text = "k: 1|k1:2|k2:3  |k3 :4"
+   data_list = text.split('|')  # ["k: 1","k1:2","k2:3  ","k3 :4"]
+   for item in data_list:
+       # item # "k: 1"
+       small_list = item.split(":")  # ["k"," 1"]
+       result[small_list[0]] = int(small_list[1].strip())
+   print(result)
+   ```
+
+   
 
 9. 写代码
 
