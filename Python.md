@@ -6587,6 +6587,21 @@ print(v3) # 0.3
        small_list = item.split(":")  # ["k"," 1"]
        result[small_list[0]] = int(small_list[1].strip())
    print(result)
+   
+   
+   
+   v = "k1:3"
+   v1, v2 = v.split(":")  # ["k1","3"]
+   print(v1, v2)
+   
+   
+   result = {}
+   text = "k: 1|k1:2|k2:3  |k3 :4"
+   data_list = text.split('|')  # ["k: 1","k1:2","k2:3  ","k3 :4"]
+   for item in data_list:
+       key, value = item.split(":")  # ["k"," 1"]
+       result[key] = int(value.strip())
+   print(result)
    ```
 
    
@@ -6599,6 +6614,37 @@ print(v3) # 0.3
    
       result = {'k1':[],'k2':[]}
    """
+   
+   result = {'k1': [], 'k2': []}
+   li = [11, 22, 33, 44, 55, 66, 77, 88, 99, 90] 
+   
+   for item in li:
+       if item > 66:
+           result['k1'].append(item)
+       elif item == 66:
+           pass
+       else:
+           result['k2'].append(item)
+   print(result)
+   
+   
+   result = {}
+   li = [11, 22, 33, 44, 55, 66, 77, 88, 99, 90]
+   
+   for item in li:
+       if item > 66:
+           if "k1" in result:
+               result['k1'].append(item)
+           else:
+               result['k1'] = [item]
+       elif item == 66:
+           pass
+       else:
+           if "k2" in result:
+               result['k2'].append(item)
+           else:
+               result['k2'] = [item]
+   print(result)
    ```
 
 10. 输出商品列表，用户输入序号，显示用户选中的商品
@@ -6621,7 +6667,1362 @@ print(v3) # 0.3
     3：如果用户输入的商品序号有误，则提示输入有误，并重新输入。
     4：用户输入Q或者q，退出程序。
     """
+    
+    goods = [
+        {"name": "电脑", "price": 1999},
+        {"name": "鼠标", "price": 10},
+        {"name": "游艇", "price": 20},
+        {"name": "美女", "price": 998}
+    ]
+    for index in range(len(goods)):
+        item = goods[index]
+        print(index + 1, item['name'], item['price'])
+    
+    while True:
+        num = input("请输入要选择的商品序号(Q/q)：")  # "1"
+        if num.upper() == "Q":
+            break
+        if num.isdecimal():
+            num = int(num)
+            if 0 < num < 5:
+                target_index = num - 1
+                choice_item = goods[target_index]
+                print(choice_item["name"], choice_item['price'])
+            else:
+                print("序号范围选择错误")
+        else:
+            print("用户输入的序号格式错误")
+    
+    # 注意：此示例是初级程序员会写的程序。
+    
+    
+    goods = [
+        {"name": "电脑", "price": 1999},
+        {"name": "鼠标", "price": 10},
+        {"name": "游艇", "price": 20},
+        {"name": "美女", "price": 998}
+    ]
+    for index in range(len(goods)):
+        item = goods[index]
+        print(index + 1, item['name'], item['price'])
+    
+    while True:
+        num = input("请输入要选择的商品序号(Q/q)：")  # "1"
+        if num.upper() == "Q":
+            break
+        if not num.isdecimal():
+            print("用输入的格式错误")
+            break
+        num = int(num)
+    
+        if num > 4 or num < 0:
+            print("范围选择错误")
+            break
+        target_index = num - 1
+        choice_item = goods[target_index]
+        print(choice_item["name"], choice_item['price'])
+    
+    
+    # 准则：
+    # - 尽可能少if嵌套
+    # - 简单的逻辑先处理
     ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# day08-总结
+
+课程目标：对第一模块 “Python基础” 阶段的知识点进行总结和考试，让学员更好的掌握此模块的相关知识。
+
+课程概要：
+
+- 代码规范
+- 知识补充
+- 阶段总结（思维导图）
+- 考试题
+
+
+
+![Python基础](笔记图片/Python基础.png)
+
+
+
+
+
+## 1. 代码规范
+
+程序员写代码是有规范的，不只是实现功能而已。
+
+
+
+### 1.1 名称
+
+在Python开发过程中会创建文件夹/文件/变量等，这些在命名有一些**潜规则**（编写代码时也要注意pep8规范）。
+
+- 文件夹，小写 & 小写下划线连接，例如：`commands`、`data_utils`等。
+
+- 文件，小写 & 小写下划线连接，例如：`page.py`、`db_convert.py`等。
+
+- 变量
+
+  - 全局变量，大写 & 大写下划线连接，例如：`NAME = "武沛齐"` 、`BASE_NAME = 18`
+  - 局部变量，小写 & 小写下划线连接，例如：`data = [11,22,33]`、`user_parent_id = 9`等。
+
+  
+
+### 1.2 注释
+
+作为程序员，写代码注释是非常基础且有用的技能，方便以后对代码进行维护和理解。
+
+- 文件夹
+  ![image-20201122135126441](笔记图片/image-20201122135126441.png)
+
+- 文件注释
+
+  ```python
+  """
+  这个文件主要为项目提供工具和转换的功能，初次之外还有日志....
+  例如：
+  	...
+  	...
+  	...
+  """
+  
+  
+  ....
+  ```
+
+- 代码注释
+
+  ```python
+  name = "alex"
+  # 在名称后面添加一个大烧饼
+  data = name + "dsb" 
+  print(data)
+  ```
+
+  ```python
+  name = "alex"
+  """
+  在名称后面添加一个大烧饼，内部的实现机制：
+  	1. xxx
+      2. xxx
+      3. xx
+  """
+  data = name + "dsb" 
+  print(data)
+  ```
+
+  
+
+### 1.3 todo
+
+基于注释可以实现todo注释的效果，例如：
+
+<img src="笔记图片/image-20201122112314543.png" alt="image-20201122112314543" style="zoom: 33%;float:left;" />
+
+
+
+### 1.4 条件嵌套
+
+以后写条件语句一定要想办法减少嵌套的层级（最好不要超过3层）。
+
+<img src="笔记图片/image-20201122112505721.png" alt="image-20201122112505721" style="zoom: 33%;float:left;" />
+
+
+
+### 1.5 简单逻辑先处理
+
+示例1：
+
+```python
+goods = [
+    {"name": "电脑", "price": 1999},
+    {"name": "鼠标", "price": 10},
+    {"name": "游艇", "price": 20},
+    {"name": "美女", "price": 998}
+]
+for index in range(len(goods)):
+    item = goods[index]
+    print(index + 1, item['name'], item['price'])
+
+while True:
+    num = input("请输入要选择的商品序号(Q/q)：")  # "1"
+    if num.upper() == "Q":
+        break
+    if num.isdecimal():
+        num = int(num)
+        if 0 < num < 5:
+            target_index = num - 1
+            choice_item = goods[target_index]
+            print(choice_item["name"], choice_item['price'])
+        else:
+            print("序号范围选择错误")
+    else:
+        print("用户输入的序号格式错误")
+```
+
+示例2：
+
+```python
+goods = [
+    {"name": "电脑", "price": 1999},
+    {"name": "鼠标", "price": 10},
+    {"name": "游艇", "price": 20},
+    {"name": "美女", "price": 998}
+]
+for index in range(len(goods)):
+    item = goods[index]
+    print(index + 1, item['name'], item['price'])
+
+while True:
+    num = input("请输入要选择的商品序号(Q/q)：")  # "1"
+    if num.upper() == "Q":
+        break
+    if not num.isdecimal():
+        print("用输入的格式错误")
+        break
+    num = int(num)
+
+    if num > 4 or num < 0:
+        print("范围选择错误")
+        break
+    target_index = num - 1
+    choice_item = goods[target_index]
+    print(choice_item["name"], choice_item['price'])
+```
+
+
+
+### 1.6 循环
+
+尽量**少循环多干事**，提高代码效率。
+
+```python
+key_list = []
+value_list = []
+# 
+info = {'k1': 'v1', 'k2': 'v2', 'k3': 'v3'}
+
+for key, value in info.items():
+    key_list.append(key)
+    value_list.append(value)
+```
+
+```python
+info = {'k1': 'v1', 'k2': 'v2', 'k3': 'v3'}
+
+key_list = list(info.keys())
+value_list = list(info.values())
+
+```
+
+
+
+### 1.7 变量和值
+
+```python
+# 推荐
+name = "武沛齐"
+age = 19
+```
+
+```python
+# 不推荐
+name="武沛齐"
+age= 18
+```
+
+可以基于Pycharm的格式化工具来实现自动处理。
+
+python代码规范：PEP8规范。
+
+
+
+## 2.知识补充
+
+
+
+### 2.1 pass
+
+一般Python的代码块是基于 `:` 和`缩进`来实现，Python中规定代码块中必须要有代码才算完整，在没有代码的情况下为了保证语法的完整性可以用pass代替，例如：
+
+```python
+# 其他编程语言
+if 提交{
+    ...
+}else{
+    ....
+}
+```
+
+```python
+if 条件 :
+    pass
+else:
+    pass
+```
+
+
+
+```python
+if 条件:
+    pass
+else:
+    pass
+```
+
+```python
+for i in range(xxx):
+    pass
+```
+
+
+
+### 2.2 is 比较
+
+`is` 和 `==`的区别是什么？
+
+- `==`，用于比较两个值是否相等。
+- is，用于表示内存地址是否一致。
+
+```python
+# 示例1
+v1 = []
+v2 = []
+
+print( v1 == v2 )  # True，两个值相当
+print( v1 is v2 )  # False，不属于同一块内存。
+```
+
+```python
+# 示例2
+v1 = []
+v2 = v1
+
+print( v1 == v2 )  # True，两个值相当
+print( v1 is v2 )  # True，属于同一块内存。
+```
+
+```python
+# 示例3
+v1 = None
+v2 = None
+
+print(v1 == v2)  # True，两个值相当
+print(v1 is v2)  # True，属于同一块内存。
+```
+
+
+
+### 2.3 位运算
+
+计算机底层本质上都是二进制，我们平时在计算机中做的很多操作底层都会转换为二进制的操作，位运算就是对二进制的操作。
+
+- `&`，与（都为1）
+
+  ```python
+  a = 60            # 60 = 0011 1100 
+  b = 13            # 13 = 0000 1101 
+  
+  c = a & b         # 12 = 0000 1100
+  ```
+
+- `|`，或（只要有一个为1）
+
+  ```python
+  a = 60            # 60 = 0011 1100 
+  b = 13            # 13 = 0000 1101 
+  
+  c = a | b         # 61 = 0011 1101 
+  ```
+
+- `^`，异或（值不同）
+
+  ```python
+  a = 60            # 60 = 0011 1100 
+  b = 13            # 13 = 0000 1101 
+  
+  c = a ^ b         # 49 = 0011 0001 
+  ```
+
+- `~`，取反
+
+  ```python
+  a = 60            #  60 = 0011 1100 
+  
+  c = ~a;           # -61 = 1100 0011
+  ```
+
+- `<<`，左移动
+
+  ```python
+  a = 60            #  60 = 0011 1100
+  c = a << 2;       # 240 = 1111 0000
+  ```
+
+- `>>`，右移动
+
+  ```python
+  a = 60            # 60 = 0011 1101 
+  c = a >> 2;       # 15 = 0000 1111
+  ```
+
+平时在开发中，二进制的位运算几乎很好少使用，在计算机底层 或 网络协议底层用的会比较多，例如：
+
+- 计算  2**n
+
+  ```python
+  2**0    1 << 0   1     1
+  2**1    1 << 1   10    2
+  2**2    1 << 2   100   4
+  2**3    1 << 3   1000  8
+  ...
+  ```
+
+- 计算一个数的一半【面试题】
+
+  ```python
+  v1 = 10 >> 1 
+  print(v1) # 值为5
+  
+  v2 = 20 >> 1
+  print(v2) # 值为 10
+  ```
+
+- 网络传输数据，文件太大还未传完（websocket源码为例）。
+
+  ```python
+       第1个字节         第2个字节         ... 
+   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+  +-+-+-+-+-------+-+-------------+-------------------------------+
+  |F|R|R|R| opcode|M| Payload len |    Extended payload length    |
+  |I|S|S|S|  (4)  |A|     (7)     |             (16/64)           |
+  |N|V|V|V|       |S|             |   (if payload len==126/127)   |
+  | |1|2|3|       |K|             |                               |
+  +-+-+-+-+-------+-+-------------+ - - - - - - - - - - - - - - - +
+  
+  FIN位置是0，表示这是一部分数据，后续还有数据。
+  FIN位置是1，表示这是最后数据，已发送完毕。
+  ```
+
+  ```python
+  # 例如：接收到的第一个字节的值为245（11110101），让v的二进制和 1000 0000 做 & 与运算。
+  
+  v = 245   # 245 11110101
+            # 128 10000000
+                  10000000
+      
+  data = v & 128
+  if data == 0:
+      print("还有数据")
+  else:
+      print("已完毕")
+  ```
+
+  
+
+## 3.阶段总结
+
+可使用思维导图（ xmind 软件），对阶段知识点的内容进行梳理，将知识梗概和重点写出来，也便于以后的回顾和复习。
+
+![image-20201122122813525](笔记图片/image-20201122122813525.png)
+
+## 4.考试题
+
+考试题的目的是让大家对自己近期知识点学习练习 以及 自测，请大家务必【独立】完成（切勿翻看笔记 & 切勿网上搜索 ）。
+
+- 第一步：自己独立完成（闭卷）
+
+- 第二步：做完之后，翻看自己笔记去修改和更正。
+
+- 第三步：觉自己做的没问题了，最后再去看考试题的参考答案和讲解。
+
+  
+
+详情见附件《第一阶段考试题.md》文件。
+
+
+
+
+
+
+
+
+
+
+
+# 第一阶段考试题
+
+1. 简述解释型语言和编译型语言的区别。
+
+2. 罗列你听说过的编程语言。
+
+3. 简述位和字节的关系？
+
+4. 简述你理解的 ascii、unicode、utf-8、gbk 编码。
+
+5. py2和py3默认解释器编码分别是什么？如何在代码中修改解释器的编码？
+
+6. pass的作用？
+
+7. is和==的区别？
+
+8. 列举你了解的Python2和Python3的区别。
+
+9. 变量名的命名规范有哪些？
+
+10. 都有那些值转换为布尔值时为False？
+
+11. 简述如下三个变量的区别。
+
+    ```python
+    v1 = (1)
+    v2 = (1,)
+    v3 = 1
+    ```
+
+12. 你所学的数据类型中哪些是可变的类型？
+
+13. 你所学的数据类型中哪些是可哈希的类型？
+
+14. 你所学的数据类型中哪些是有序的？
+
+15. 列举你能记得的如下数据类型的方法（独有功能）。
+
+    - str
+    - list
+    - dict
+
+16. 请将字符 `name = "wupeiqi"` 翻转。
+
+17. 进制之间如何进行转换？
+
+18. 循环过程中 break和continue的作用是什么？
+
+19. 看代码写结果
+
+    ```python
+    v1 = 1 or 9 and 88 or [11,22] and (1,2,3)
+    
+    v2 = 1>5 or "alex" and {"K1":"v1"} or 888
+    
+    print(v1,v2)
+    ```
+
+20. 看代码写结果
+
+    ```python
+     info = [ 
+         {'k1':(1),'k2':{'k9':'luffy','k10':'武沛齐'}}, 
+         (11,22,33,44),
+         {199,2,3,4,5},
+         True, 
+         ['李杰','alex', { 'extra': ("alex",[18,20],'eric') } ]
+    ]
+    ```
+
+    - 利用索引获取 "luffy" 
+    - 利用索引获取 44
+    - 删除k10对应的键值对
+    - 在 `{ 'extra': ("alex",[18,20],'eric') }` 字典中添加一个键值对 `"name":"武沛齐"`
+    - 在集合` {199,2,3,4,5} `中添加一个 "北京"
+    - 将列表中的True修改为 "真"
+    - 在列表 `[18,20]`的第0个索引位置插入 666
+
+21. 判断下面的代码是否正确？正确的话则写出结果，否则标明错误。
+
+    ```python
+    v1 = (11,22,33)
+    v2 = (11)
+    v3 = {11,2,33}
+    v4 = {11,2,("alex","eric"),33}
+    v5 = {11,2,("alex",{"北京","上海"},"eric"),33}
+    ```
+
+22. 看代码写结果
+
+    ```python
+    v1 = [11,22,33]
+    v2 = [11,22,33]
+    v1.append(666)
+    
+    print(v1)
+    print(v2)
+    ```
+
+23. 看代码写结果
+
+    ```python
+    v1 = [11,22,33]
+    v2 = v1
+    v1.append(666)
+    
+    print(v1)
+    print(v2)
+    ```
+
+24. 看代码写结果
+
+    ```python
+    v1 = [1,2,3,4,5]
+    v2 = [v1,v1,v1]
+    v2[1][0] = 111
+    v2[2][0] = 222
+    
+    print(v1)
+    print(v2)
+    ```
+
+25. 写代码实现，循环提示用户输入内容（Q或q终止），并将内容用 "_" 连接起来。
+
+26. 写代码实现，将IP转换为整数。
+
+    > 如 10.3.9.12 转换规则为：
+    >      10            00001010
+    >       3             00000011
+    >       9             00001001
+    >      12            00001100
+    > 再将以上二进制拼接起来，然后再进行一次翻转。
+    >
+    > 最终将翻转之后的二进制转换为整型。
+
+27. 写代码实现，车牌的区域划分。
+
+    ```python
+    car_list = ['鲁A32444', '沪B12333', '京B8989M', '京C49678', '黑C46555', '晋B25041', '沪C34567']
+    
+    # 根据以上代码获取各省车牌数量，例如：info = {"沪":2,"京":2 ...}
+    ```
+
+28. 写代码实现，数据格式化处理。
+
+    ```python
+    text = """id,name,age,phone,job
+    1,alex,22,13651054608,IT 
+    2,wusir,23,13304320533,Tearcher
+    3,老男孩,18,1333235322,IT"""
+    
+    # 将上述数据处理为如下格式的结果：
+    #    info = [{'id':'1','name':'alex','age':'22','phone':'13651054608','job':'IT'},.... ..]
+    # 提示：text的内容是根据 \n 分割（\n表示回车换行）。
+    
+    ```
+
+29. 写代码实现 累乘计算器。
+
+    ```python
+    content = input("请输入内容:") # 用户可能输入 5*9*99.... 或 5* 9 * 10 * 99 或 5 * 9 * 99...
+    
+    # 补充代码实现
+    ```
+
+30. 使用for循环实现输出 9*9 乘法表
+
+    ```
+    1*1
+    2*1 2*2
+    3*1 3*2 3*3
+    4*1 4*2 4*3 4*4
+    5*1 5*2 5*3 5*4 5*5
+    6*1 6*2 6*3 6*4 6*5 6*6
+    7*1 7*2 7*3 7*4 7*5 7*6 7*7
+    8*1 8*2 8*3 8*4 8*5 8*6 8*7 8*8
+    9*1 9*2 9*3 9*4 9*5 9*6 9*7 9*8 9*9
+    ```
+
+31. 补充代码实现《棋牌游戏11点》
+
+    需求：
+
+    - 生成一副扑克牌（自己设计扑克牌的结构，小王和大王可以分别用14、15表示 ）
+
+    - 3个玩家
+
+      ```python
+      user_list = ["alex","武沛齐","李路飞"]
+      ```
+
+    - 发牌规则
+
+      - 默认先给用户发一张牌，其中 J、Q、K、小王、大王代表的值为0.5，其他就是则就是当前的牌面值。
+      - 用户根据自己的情况判断是否继续要牌。
+        - 要，则再给他发一张。
+        - 不要，则开始给下个玩家发牌。
+      - 如果用户手中的所有牌相加大于11，则表示爆了，此人的分数为0，并且自动开始给下个人发牌。
+
+    - 最终计算并获得每个玩家的分值，例如：
+
+      ```python
+      result = {
+          "alex":8,
+          "武沛齐":9,
+          "李路飞":0
+      }
+      ```
+
+    必备技术点：随机抽排
+
+    ```python
+    import random
+    
+    total_poke_list = [("红桃", 1), ("黑桃", 2), ("大王", 15), ("小王", 14)]
+    
+    # 随机生成一个数，当做索引。
+    index = random.randint(0, len(total_poke_list) - 1)
+    # 获取牌
+    print("抽到的牌为：", total_poke_list[index])
+    # 踢除这张牌
+    total_poke_list.pop(index)
+    
+    print("抽完之后，剩下的牌为：", total_poke_list)
+    ```
+
+    
+
+    代码示例：（请补充实现）
+
+    ```python
+    result = {}
+    user_list = ["alex","武沛齐","李路飞"]
+    # 补充代码
+    
+    
+    print(result)
+    ```
+
+    
+
+    
+
+# 第一阶段考试题（带答案）
+
+1. 简述解释型语言和编译型语言的区别。
+
+   ```
+   编译器和解释器的作用是将各编程语言的代码进行翻译，从而使得计算机能够识别并执行。
+   编译器，全文翻译，将代码编译成`临时文件`，再执行临时文件。
+   解释器，实时翻译，对代码实行边解释边执行。
+   ```
+
+2. 罗列你听说过的编程语言。
+
+   ```
+   Java、C、C++、PHP、JavaScript、C#、Golang
+   ```
+
+3. 简述位和字节的关系？
+
+   ```
+   1字节等于8位
+   ```
+
+4. 简述你理解的 ascii、unicode、utf-8、gbk 编码。
+
+   ```
+   ascii编码、unicode字符集、utf-8编码、gbk编码本质上都是字符与二进制的关系。
+   - ascii，只有256种对照关系，只包含英文、符号等。
+   - unicode，万国码，包含了全球所有文字和二进制之间的一个对应关系。（ucs2或ucs4）
+   - utf-8，对unicode字符集的码位进行压缩处理，间接也维护了字符和二进制的对照表。
+   - gbk，包含中国、日本韩国等亚洲国家的文字和二进制的对照表。
+   ```
+
+5. py2和py3默认解释器编码分别是什么？如何在代码中修改解释器的编码？
+
+   ```
+   py2:ascii
+   py3:utf-8
+   
+   在文件的顶部通过设置： # -*- coding:编码 -*- 实现修改。
+   ```
+
+6. pass的作用？
+
+   ```
+   pass相当于空行，程序啥都不做。 用于保持语法的完整性。
+   ```
+
+7. is和==的区别？
+
+   ```
+   is，比较内存地址是否一致。
+   ==，比较值是否相等。
+   ```
+
+8. 列举你了解的Python2和Python3的区别。
+
+   ```python
+   - 默认解释器编码
+   - 整型和长整形
+   - 地板除取整、取小数
+   - 字典的keys()/values()/items() 获取的值不同。
+   - py2，字典无序；py3.6+ 字典有序。
+   ```
+
+9. 变量名的命名规范有哪些？
+
+   ```
+   三条规范（必须遵循，否则定义变量会报错）
+     - 变量名只能由 字母、数字、下划线 组成。
+     - 变量名不能以数字开头。
+     - 变量名不能是Python内置关键字
+   二条建议（遵循可以显得更加专业，不遵循也可以正常运行不报错）
+   	- 下划线命名法，多个单词表示的变量名用下划线连接（均小写）
+   	- 见名知意，通过阅读变量名就能知道此变量的含义。
+   ```
+
+10. 都有那些值转换为布尔值时为False？
+
+    ```
+    0
+    ""
+    [] or list()
+    () or tuple()
+    set()
+    None
+    {} or dict()
+    ```
+
+11. 简述如下三个变量的区别。
+
+    ```python
+    v1 = (1)    # 整型 1
+    v2 = (1,)   # 元组
+    v3 = 1      # 整型 1
+    ```
+
+12. 你所学的数据类型中哪些是可变的类型？
+
+    ```
+    list
+    set
+    dict
+    ```
+
+13. 你所学的数据类型中哪些是可哈希的类型？
+
+    ```
+    int
+    bool
+    float
+    str
+    tuple
+    ```
+
+14. 你所学的数据类型（容器）中哪些是有序的？
+
+    ```
+    list
+    tuple
+    dict（py3.6之后）
+    ```
+
+15. 列举你能记得的如下数据类型的方法（独有功能）。
+
+    - str
+
+      ```
+      strip
+      split
+      join
+      startswith
+      endswith
+      upper
+      lower
+      ...
+      ```
+
+    - list
+
+      ```
+      append
+      insert
+      remove
+      extend
+      sort
+      reverse
+      ...
+      ```
+
+    - dict
+
+      ```
+      get
+      keys
+      values
+      items
+      setdefault
+      update
+      ...
+      ```
+
+16. 请将字符 `name = "wupeiqi"` 翻转。
+
+    ```
+    data = name[::-1]
+    print(data)
+    ```
+
+17. 进制之间如何进行转换？
+
+    ```python
+    - 十进制转其他：bin、oct、hex
+    - 其他进制转十进制：int("其他进制",base=2或8或16)
+    ```
+
+18. 循环过程中 break和continue的作用是什么？
+
+    ```python
+    break，终止所有循环。
+    continue，停止当前循环开始下次循环。
+    ```
+
+19. 看代码写结果
+
+    ```python
+    v1 = 1 or 9 and 88 or [11,22] and (1,2,3)
+    
+    v2 = 1>5 or "alex" and {"K1":"v1"} or 888
+    
+    print(v1,v2) # 1    {'K1': 'v1'}
+    ```
+
+20. 看代码写结果
+
+    ```python
+     info = [ 
+         {'k1':(1),'k2':{'k9':'luffy','k10':'武沛齐'}}, 
+         (11,22,33,44),
+         {199,2,3,4,5},
+         True, 
+         ['李杰','alex', { 'extra': ("alex",[18,20],'eric') } ]
+    ]
+    ```
+
+    - 利用索引获取 "luffy" 
+
+      ```python
+      info[0]["k2"]["k9"]
+      ```
+
+    - 利用索引获取 44
+
+      ```python
+      info[1][-1]
+      ```
+
+    - 删除k10对应的键值对
+
+      ```python
+      del info[0]['k2']['k10']
+      ```
+
+    - 在 `{ 'extra': ("alex",[18,20],'eric') }` 字典中添加一个键值对 `"name":"武沛齐"`
+
+      ```python
+      info[-1][2]["name"] = "武沛齐"
+      ```
+
+    - 在集合` {199,2,3,4,5} `中添加一个 "北京"
+
+      ```python
+      info[2].add("北京")
+      ```
+
+    - 将列表中的True修改为 "真"
+
+      ```python
+      info[3] = "真"
+      ```
+
+    - 在列表 `[18,20]`的第0个索引位置插入 666
+
+      ```python
+      info[-1][-1]["extra"][1].insert(0,666)
+      ```
+
+      
+
+21. 判断下面的代码是否正确？正确的话则写出结果，否则标明错误。
+
+    ```python
+    v1 = (11,22,33)									# 正确 (11,22,33)
+    v2 = (11)										# 正确 11
+    v3 = {11,2,33}									# 正确 {11,2,33}
+    v4 = {11,2,("alex","eric"),33}					# 正确 {11,2,("alex","eric"),33}
+    v5 = {11,2,("alex",{"北京","上海"},"eric"),33}	  # 错误
+    ```
+
+22. 看代码写结果
+
+    ```python
+    v1 = [11,22,33]
+    v2 = [11,22,33]
+    v1.append(666)
+    
+    print(v1)  # [11,22,33,666]
+    print(v2)  # [11,22,33]
+    ```
+
+23. 看代码写结果
+
+    ```python
+    v1 = [11,22,33]
+    v2 = v1
+    v1.append(666)
+    
+    print(v1) # [11,22,33,666]
+    print(v2) # [11,22,33,666]
+    ```
+
+24. 看代码写结果
+
+    ```python
+    v1 = [1,2,3,4,5]
+    v2 = [v1,v1,v1]
+    
+    v2[1][0] = 111
+    v2[2][1] = 222
+    
+    print(v1) # [111,222,3,4,5]
+    print(v2) # [[111,222,3,4,5],[111,222,3,4,5],[111,222,3,4,5]]
+    ```
+
+25. 写代码实现，循环提示用户输入内容（Q或q终止），并将内容用 "_" 连接起来。
+
+    ```python
+    data_list = []
+    while True:
+        text = input("请输入（Q/q退出）：")
+        if text.upper() == "Q":
+            break
+        data_list.append(text)
+    
+    result = "_".join(data_list)
+    print(result)
+    ```
+
+26. **写代码实现，将IP转换为整数。**
+
+    > 如 10.3.9.12 转换规则为：
+    >      10            00001010
+    >       3             00000011
+    >       9             00001001
+    >      12            00001100
+    > 再将以上二进制拼接起来，然后再进行一次翻转。
+    >
+    > 最终将翻转之后的二进制转换为整型。
+
+    ```python
+    ip = "10.3.9.12"
+    
+    data_list = []
+    num_list = ip.split(".")
+    for num in num_list:
+        item = bin(int(num))[2:].zfill(8)
+        data_list.append(item)
+    
+    reverse_data = "".join(data_list)[::-1]
+    result = int(reverse_data, base=2)
+    print(result)
+    ```
+
+27. 写代码实现，车牌的区域划分。
+
+    ```python
+    car_list = ['鲁A32444', '沪B12333', '京B8989M', '京C49678', '黑C46555', '晋B25041', '沪C34567']
+    
+    # 根据以上代码获取各省车牌数量，例如：info = {"沪":2,"京":2 ...}
+    ```
+
+    ```python
+    car_list = ['鲁A32444', '沪B12333', '京B8989M', '京C49678', '黑C46555', '晋B25041', '沪C34567']
+    
+    info = {}
+    
+    for item in car_list:
+        city = item[0]
+        if city in info:
+            info[city] = info[city] + 1
+        else:
+            info[city] = 1
+    
+    print(info)
+    ```
+
+    ```python
+    car_list = ['鲁A32444', '鲁B12333', '京B8989M', '京C49678', '黑C46555', '晋B25041', '沪C34567']
+    
+    info = {}
+    for item in car_list:
+        city = item[0]
+        num = info.get(city, 0)
+        info[city] = num + 1
+    print(info)
+    ```
+
+    
+
+28. 写代码实现，数据格式化处理。
+
+    ```python
+    text = """id,name,age,phone,job
+    1,alex,22,13651054608,IT 
+    2,wusir,23,13304320533,Tearcher
+    3,老男孩,18,1333235322,IT"""
+    
+    # 将上述数据处理为如下格式的结果：
+    #    info = [  {'id':'1','name':'alex','age':'22','phone':'13651054608','job':'IT'},.... ..  ]
+    
+    # 提示：text的内容是根据 \n 分割（\n表示回车换行）。
+    ```
+
+    ```python
+    text = """id,name,age,phone,job
+    1,alex,22,13651054608,IT 
+    2,wusir,23,13304320533,Tearcher
+    3,老男孩,18,1333235322,IT"""
+    
+    data_list = text.split("\n") # ["id,name,age,phone,job","1,alex,22,13651054608,IT"... ]
+    header_list = data_list[0].split(",") # ["id","name","age"... ]
+    info = []
+    for index in range(1, len(data_list)):
+        item = {}
+        row = data_list[index] # 1,alex,22,13651054608,IT 
+        row_item_list = row.split(",") # ["1","alex","22",...]
+        for i in range(len(row_item_list)):
+            item[header_list[i]] = row_item_list[i]
+        info.append(item)
+    print(info)
+    ```
+
+29. 写代码实现 累乘计算器。
+
+    ```python
+    content = input("请输入内容:") # 用户可能输入 5*9*99.... 或 5* 9 * 10 * 99 或 5 * 9 * 99... （不用考虑非数字的情况）
+    
+    # 补充代码实现
+    result = 1
+    num_list = content.split("*") # ["5","9","99"]
+    for num in num_list:
+        # result *= int(num)
+        result = result * int(num)
+    
+    print(result)
+    ```
+
+30. 使用for循环实现输出 9*9 乘法表
+
+    ```
+    1*1
+    2*1 2*2
+    3*1 3*2 3*3
+    4*1 4*2 4*3 4*4
+    5*1 5*2 5*3 5*4 5*5
+    6*1 6*2 6*3 6*4 6*5 6*6
+    7*1 7*2 7*3 7*4 7*5 7*6 7*7
+    8*1 8*2 8*3 8*4 8*5 8*6 8*7 8*8
+    9*1 9*2 9*3 9*4 9*5 9*6 9*7 9*8 9*9
+    
+    
+    1*1 
+    1*2 2*2 
+    1*3 2*3 3*3 
+    1*4 2*4 3*4 4*4 
+    1*5 2*5 3*5 4*5 5*5 
+    1*6 2*6 3*6 4*6 5*6 6*6 
+    1*7 2*7 3*7 4*7 5*7 6*7 7*7 
+    1*8 2*8 3*8 4*8 5*8 6*8 7*8 8*8 
+    1*9 2*9 3*9 4*9 5*9 6*9 7*9 8*9 9*9 
+    ```
+
+    ```python
+    print("666",end=" ")
+    print("999",end=" ")
+    666 999 
+    ```
+
+    ```python
+    for i in range(10):
+        # 0,1,2,3,4,5,6,7,8
+        for j in range(i): # []  [0] [0,1] [0,1,2]
+            # 0,1
+    ```
+
+    ```python
+    for i in range(1, 10):
+        # 1 2 3 4 5 6 7 8 9
+        for j in range(1, i + 1): # [1]  [1,2]  [1,2,3]  [1,2,3,4] [1,2,3,4,5] ... [1,2,3,4...9 ]
+            # j * i
+            # 1 * 1
+            # 1 * 2  2 * 2
+            # 1 * 3 2 * 2
+            text = "{}*{}".format(j, i)
+            print(text, end=" ")
+        print("")
+    ```
+
+    ```python
+    for i in range(1, 10):
+        for a in range(0, 9-i):
+            print(end="       ")
+            # print(end=" ")
+        for j in range(1, i+1):
+            # result = "{}*{}={}".format(i, j, str(i*j).zfill(2))
+            result = "%d*%d=%2d"%(i, j, i*j)
+            print(result, end=" ")
+        print()
+    ```
+
+    
+
+31. 补充代码实现《棋牌游戏11点》
+
+    需求：
+
+    - 生成一副扑克牌（自己设计扑克牌的结构，小王和大王可以分别用14、15表示 ）
+
+    - 3个玩家
+
+      ```python
+      user_list = ["alex","武沛齐","李路飞"]
+      ```
+
+    - 发牌规则
+
+      - 默认先给用户发一张牌，其中 J、Q、K、小王、大王代表的值为0.5，其他就是则就是当前的牌面值。
+      - 用户根据自己的情况判断是否继续要牌。
+        - 要，则再给他发一张。
+        - 不要，则开始给下个玩家发牌。
+      - 如果用户手中的所有牌相加大于11，则表示爆了，此人的分数为0，并且自动开始给下个人发牌。
+
+    - 最终计算并获得每个玩家的分值，例如：
+
+      ```python
+      result = {
+          "alex":8,
+          "武沛齐":9,
+          "李路飞":0
+      }
+      ```
+
+    必备技术点：随机抽排
+
+    ```python
+    import random
+    
+    total_poke_list = [("红桃", 1), ("黑桃", 2), ("大王", 15), ("小王", 14)]
+    
+    # 随机生成一个数，当做索引。
+    index = random.randint(0, len(total_poke_list) - 1)
+    # 获取牌
+    print("抽到的牌为：", total_poke_list[index])
+    # 踢除这张牌
+    data = total_poke_list.pop(index) # ("红桃", 1)
+    
+    print("抽完之后，剩下的牌为：", total_poke_list)
+    ```
+
+    
+
+    代码示例：（请补充实现）
+
+    ```python
+    import random
+    
+    result = {}
+    
+    user_list = ["alex", "武沛齐", "李路飞"]
+    
+    # 1. 生成一副扑克牌
+    total_poke_list = [ ("小王",14),("大王",15) ]
+    color_list = ["红桃", "黑桃", "方片", "梅花"]
+    num_list = []
+    for num in range(1, 14):
+        num_list.append(num)
+    for color in color_list:
+        for num in num_list:
+            item = (color, num,)
+            total_poke_list.append(item)
+    
+    # 2. 发牌 -> ["alex", "武沛齐", "李路飞"]
+    for user in user_list:
+        # 给用户发第一张牌
+        score = 0
+        index = random.randint(0, len(total_poke_list) - 1)
+        poke = total_poke_list.pop(index) # ("花色",值)
+        # JQK表示 0.5 点
+        value = poke[1]
+        if poke[1] > 10:
+            value = 0.5 
+        score += value
+        print("给{}发的牌：{}{}，此刻所有牌面值总和:{}".format(user, poke[0], poke[1], score))
+        
+        # 用户选择是否继续要
+        while True:
+            choice = input("是否继续要牌(Y/N)？")
+            choice = choice.upper()
+    
+            # 用户输入的不是Y/N/y/n
+            if choice not in {"Y", "N"}:
+                print("输入错误，请重新输入。")
+                continue
+    
+            # 用户输入N，不继续要牌了
+            if choice == "N":
+                print("{}不要拍了".format(user))
+                break
+    
+            # 继续要拍（再随机抽取一张）
+            index = random.randint(0, len(total_poke_list) - 1)
+            poke = total_poke_list.pop(index)
+            value = poke[1]
+            if poke[1] > 10:
+                value = 0.5
+            score += value
+            
+            print("给{}发的牌：{}{}，此刻所有牌面值总和:{}".format(user, poke[0], poke[1], score))
+    
+            # 大于11点，则用户爆了且分值变为0
+            if score > 11:
+                print("用户{}爆了".format(user))
+                score = 0
+                break
+    
+        result[user] = score
+    
+    print(result)
+    ```
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
